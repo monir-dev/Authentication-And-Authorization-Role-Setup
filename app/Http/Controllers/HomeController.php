@@ -41,19 +41,20 @@ class HomeController extends Controller
     public function authorIndex()
     {
 
-        $role_id = DB::table('user_role')
-                ->join('users', 'user_role.user_id', '=', 'users.id')
-                ->join('roles','user_role.role_id','=','roles.id')
-                ->where('user_role.user_id', Auth::user()->id)
-                ->select('roles.id')
-                ->first();
-
-      if ($role_id->id==3) {
-        $users = User::all();
-        return view('author')->withUsers($users);
-      }
-      return redirect()->back();
-
+      //   $role_id = DB::table('user_role')
+      //           ->join('users', 'user_role.user_id', '=', 'users.id')
+      //           ->join('roles','user_role.role_id','=','roles.id')
+      //           ->where('user_role.user_id', Auth::user()->id)
+      //           ->select('roles.id')
+      //           ->first();
+      //
+      // if ($role_id->id==3) {
+      //   $users = User::all();
+      //   return view('author')->withUsers($users);
+      // }
+      // return redirect()->back();
+      $users = User::all();
+      return view('author')->withUsers($users);
 
     }
 

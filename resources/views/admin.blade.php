@@ -5,10 +5,13 @@
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default">
-                <div class="panel-heading">Admin  Dashboard</div>
+                <div class="panel-heading">{{ Auth::user()->name }} Dashboard</div>
 
                 <div class="panel-body">
                     You are logged in as admin!
+                    @foreach (Auth::user()->roles as $role)
+                      <p>{{ $role->role_name }}</p> <br>
+                    @endforeach
                 </div>
             </div>
         </div>
@@ -29,6 +32,7 @@
                     @foreach ($users as $user)
                         <tr>
                             <form class="" action="{{ route('admin.assign') }}" method="post">
+
                                 <td>{{ $user->name }}</td>
                                 <td>{{ $user->email }} <input type="hidden" name="email" value="{{ $user->email }}"></td>
                                 <td><input type="checkbox" name="role_visitor" {{ $user->hasRole('Visitor') ? 'checked' : '' }}></td>

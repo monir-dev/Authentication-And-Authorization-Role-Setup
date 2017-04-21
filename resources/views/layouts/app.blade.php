@@ -47,30 +47,46 @@
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
+                  @if (Auth::check())
                     <li><a href="{{ url('/home') }}">Home</a></li>
                     <li><a href="{{ url('/admin') }}">Admin</a></li>
-                    @php
-                    $role_id=null;
-                    if(Auth()->user()){
-                      $role_id = DB::table('user_role')
-                              ->join('users', 'user_role.user_id', '=', 'users.id')
-                              ->join('roles','user_role.role_id','=','roles.id')
-                              ->where('user_role.user_id', Auth::user()->id)
-                              ->select('roles.id')
-                              ->first();
-                    }
+                    <li><a href="{{ url('/author') }}">Author</a></li>
+                    <li><a href="{{ url('/visitor') }}">Visitor</a></li>
+                    {{-- @if (Auth::user()->hasRole('Admin'))
+                        <li><a href="{{ url('/admin') }}">Admin</a></li>
+                    @endif
+
+                    @if (Auth::user()->hasRole('Author'))
+                        <li><a href="{{ url('/author') }}">Author</a></li>
+                    @endif
+                    @if (Auth::user()->hasRole('Visitor'))
+                        <li><a href="{{ url('/visitor') }}">Visitor</a></li>
+                    @endif --}}
+
+                  @endif
+
+                    {{-- @php
+                      $role_id=null;
+                      if(Auth()->user()){
+                        $role_id = DB::table('user_role')
+                                ->join('users', 'user_role.user_id', '=', 'users.id')
+                                ->join('roles','user_role.role_id','=','roles.id')
+                                ->where('user_role.user_id', Auth::user()->id)
+                                ->select('roles.id')
+                                ->first();
+                      }
                     @endphp
 
                     @if (Auth()->user())
                       @if ($role_id->id==3)
                         <li><a href="{{ url('/author') }}">Author</a></li>
                       @endif
-                    @endif
+                    @endif --}}
 
 
 
 
-                    <li><a href="{{ url('/visitor') }}">Visitor</a></li>
+
 
                 </ul>
 

@@ -22,14 +22,24 @@ Route::get('/home', 'HomeController@index');
 Route::get('/admin', [
   'uses' => 'HomeController@adminIndex',
   'as' => 'admin',
-  'middeware' => 'roles',
+  'middleware' => 'roles',
   'roles' => ['Admin']
 ]);
 Route::post('/admin', [
   'uses' => 'HomeController@postAdminAssignRoles',
   'as' => 'admin.assign',
-  'middeware' => 'roles',
-  'roles' => ['Admin', 'Author']
+  'middleware' => 'roles',
+  'roles' => ['Admin']
 ]);
-Route::get('/author', 'HomeController@authorIndex');
-Route::get('/visitor', 'HomeController@visitorIndex');
+Route::get('/author', [
+  'uses' => 'HomeController@authorIndex',
+  'as'   => 'author',
+  'middleware' => 'roles',
+  'roles' => ['Author']
+]);
+Route::get('/visitor', [
+  'uses' => 'HomeController@visitorIndex',
+  'as'  => 'visitor',
+  'middleware' => 'roles',
+  'roles' => ['Visitor']
+]);
